@@ -1,0 +1,49 @@
+/**
+ * Copyright 2018 Thomas Weiss <theo@m1theo.org>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.m1theo.tinkerforge.server.impl;
+
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Future;
+import io.vertx.core.Handler;
+import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
+import org.m1theo.tinkerforge.emf.client.Client;
+import org.m1theo.tinkerforge.emf.client.LoggingDataListener;
+import org.m1theo.tinkerforge.server.TinkerforgeEcosystem;
+import org.m1theo.tinkerforge.server.commands.CommandHolder;
+import org.m1theo.tinkerforge.server.commands.DeviceOptions;
+
+/**
+ * @author theo@m1theo.org
+ */
+public class TinkerforgeEcosystemImpl implements TinkerforgeEcosystem {
+  private final Vertx vertx;
+  private final JsonObject config;
+  private final Client client;
+
+  public TinkerforgeEcosystemImpl(Vertx vertx, JsonObject config) {
+    this.vertx = vertx;
+    this.config = config;
+    client = Client.createInstance(config.getMap(), new LoggingDataListener());
+  }
+
+  @Override
+  public void execute(String uid, String subId, CommandHolder command, DeviceOptions
+      options, Handler<AsyncResult<Void>> handler) {
+    //client.execute(uid, subId, command, options);
+    handler.handle(Future.failedFuture("not implemented"));
+  }
+}

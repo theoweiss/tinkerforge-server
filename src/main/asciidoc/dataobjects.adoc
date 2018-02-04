@@ -1,0 +1,100 @@
+= Cheatsheets
+
+[[ColorValue]]
+== ColorValue
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[blue]]`blue`|`Number (int)`|-
+|[[green]]`green`|`Number (int)`|-
+|[[red]]`red`|`Number (int)`|-
+|===
+
+[[CommandHolder]]
+== CommandHolder
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|===
+
+[[DecimalValue]]
+== DecimalValue
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|===
+
+[[DeviceOptions]]
+== DeviceOptions
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[options]]`options`|`String`|-
+|===
+
+[[DirectionValue]]
+== DirectionValue
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[direction]]`direction`|`link:enums.html#Direction[Direction]`|-
+|===
+
+[[HighLowValue]]
+== HighLowValue
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[value]]`value`|`link:enums.html#HighLow[HighLow]`|-
+|===
+
+[[IncreaseDecreaseValue]]
+== IncreaseDecreaseValue
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[value]]`value`|`link:enums.html#IncreaseDecrease[IncreaseDecrease]`|-
+|===
+
