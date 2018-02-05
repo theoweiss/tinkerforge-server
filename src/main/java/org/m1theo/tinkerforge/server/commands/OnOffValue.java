@@ -15,13 +15,44 @@
  */
 package org.m1theo.tinkerforge.server.commands;
 
+import io.vertx.codegen.annotations.DataObject;
+import io.vertx.core.json.JsonObject;
+
 /**
  * @author theo@m1theo.org
  */
 
-/**
- * just a marker interface for commands
- */
-public interface Command {
-  static final String COMMAND_TYPE_FIELD = "commandType";
+@DataObject(generateConverter = true)
+public class OnOffValue {
+  private OnOff value;
+
+  public OnOffValue(OnOff value) {
+    this.value = value;
+  }
+
+  public OnOffValue() {
+  }
+
+  public OnOffValue(JsonObject json) {
+    this();
+    OnOffValueConverter.fromJson(json, this);
+  }
+
+  public JsonObject toJson(){
+    JsonObject json = new JsonObject();
+    OnOffValueConverter.toJson(this, json);
+    return json;
+  }
+
+  public OnOff getValue() {
+    return value;
+  }
+
+  public void setValue(OnOff value) {
+    this.value = value;
+  }
+
+  public enum OnOff {
+    ON, OFF
+  }
 }

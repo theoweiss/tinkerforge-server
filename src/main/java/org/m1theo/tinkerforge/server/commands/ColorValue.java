@@ -26,6 +26,7 @@ import org.m1theo.tinkerforge.server.exceptions.IllegalValueException;
 
 @DataObject(generateConverter = true)
 public class ColorValue implements Command {
+  public static final String COMMAND_TYPE = CommandType.COLOR.getType();
   private int red;
   private int green;
   private int blue;
@@ -47,6 +48,7 @@ public class ColorValue implements Command {
   public JsonObject toJson(){
     JsonObject json = new JsonObject();
     ColorValueConverter.toJson(this, json);
+    json.put(Command.COMMAND_TYPE_FIELD, COMMAND_TYPE);
     return json;
   }
 

@@ -15,13 +15,44 @@
  */
 package org.m1theo.tinkerforge.server.commands;
 
+import io.vertx.codegen.annotations.DataObject;
+import io.vertx.core.json.JsonObject;
+
 /**
  * @author theo@m1theo.org
  */
 
-/**
- * just a marker interface for commands
- */
-public interface Command {
-  static final String COMMAND_TYPE_FIELD = "commandType";
+@DataObject(generateConverter = true)
+public class UpDownValue implements Command{
+  private UpDown value;
+
+  public UpDownValue(UpDown value) {
+    this.value = value;
+  }
+
+  public UpDownValue() {
+  }
+
+  public UpDownValue(JsonObject json){
+    this();
+    UpDownValueConverter.fromJson(json, this);
+  }
+
+  public JsonObject toJson(){
+    JsonObject json = new JsonObject();
+    UpDownValueConverter.toJson(this, json);
+    return json;
+  }
+
+  public UpDown getValue() {
+    return value;
+  }
+
+  public void setValue(UpDown value) {
+    this.value = value;
+  }
+
+  public enum UpDown{
+    UP, DOWN
+  }
 }

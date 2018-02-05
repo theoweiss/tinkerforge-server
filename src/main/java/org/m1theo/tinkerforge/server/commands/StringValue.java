@@ -15,13 +15,40 @@
  */
 package org.m1theo.tinkerforge.server.commands;
 
+import io.vertx.codegen.annotations.DataObject;
+import io.vertx.core.json.JsonObject;
+
 /**
  * @author theo@m1theo.org
  */
 
-/**
- * just a marker interface for commands
- */
-public interface Command {
-  static final String COMMAND_TYPE_FIELD = "commandType";
+@DataObject(generateConverter = true)
+public class StringValue implements Command {
+  private String value;
+
+  public StringValue(String value) {
+    this.value = value;
+  }
+
+  public StringValue() {
+  }
+
+  public StringValue(JsonObject json){
+    this();
+    StringValueConverter.fromJson(json, this);
+  }
+
+  public JsonObject toJson(){
+    JsonObject json = new JsonObject();
+    StringValueConverter.toJson(this, json);
+    return json;
+  }
+
+  public String getValue() {
+    return value;
+  }
+
+  public void setValue(String value) {
+    this.value = value;
+  }
 }

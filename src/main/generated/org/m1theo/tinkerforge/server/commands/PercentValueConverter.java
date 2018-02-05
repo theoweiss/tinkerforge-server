@@ -15,13 +15,19 @@
  */
 package org.m1theo.tinkerforge.server.commands;
 
-/**
- * @author theo@m1theo.org
- */
+import io.vertx.core.json.JsonObject;
+import io.vertx.core.json.JsonArray;
 
 /**
- * just a marker interface for commands
+ * Converter for {@link org.m1theo.tinkerforge.server.commands.PercentValue}.
+ *
+ * NOTE: This class has been automatically generated from the {@link org.m1theo.tinkerforge.server.commands.PercentValue} original class using Vert.x codegen.
  */
-public interface Command {
-  static final String COMMAND_TYPE_FIELD = "commandType";
+public class PercentValueConverter {
+
+  public static void fromJson(JsonObject json, PercentValue obj) {
+  }
+
+  public static void toJson(PercentValue obj, JsonObject json) {
+  }
 }

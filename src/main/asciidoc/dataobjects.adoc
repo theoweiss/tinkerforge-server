@@ -98,3 +98,72 @@
 |[[value]]`value`|`link:enums.html#IncreaseDecrease[IncreaseDecrease]`|-
 |===
 
+[[OnOffValue]]
+== OnOffValue
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[value]]`value`|`link:enums.html#OnOff[OnOff]`|-
+|===
+
+[[PercentValue]]
+== PercentValue
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|===
+
+[[StopMoveValue]]
+== StopMoveValue
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[value]]`value`|`link:enums.html#StopMove[StopMove]`|-
+|===
+
+[[StringValue]]
+== StringValue
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[value]]`value`|`String`|-
+|===
+
+[[UpDownValue]]
+== UpDownValue
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[value]]`value`|`link:enums.html#UpDown[UpDown]`|-
+|===
+
