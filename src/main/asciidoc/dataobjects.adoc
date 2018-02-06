@@ -12,6 +12,7 @@
 |===
 ^|Name | Type ^| Description
 |[[blue]]`blue`|`Number (int)`|-
+|[[commandType]]`commandType`|`link:enums.html#CommandType[CommandType]`|-
 |[[green]]`green`|`Number (int)`|-
 |[[red]]`red`|`Number (int)`|-
 |===
@@ -40,6 +41,7 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[commandType]]`commandType`|`link:enums.html#CommandType[CommandType]`|-
 |===
 
 [[DeviceOptions]]
@@ -67,6 +69,7 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[commandType]]`commandType`|`link:enums.html#CommandType[CommandType]`|-
 |[[direction]]`direction`|`link:enums.html#Direction[Direction]`|-
 |===
 
@@ -81,6 +84,7 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[commandType]]`commandType`|`link:enums.html#CommandType[CommandType]`|-
 |[[value]]`value`|`link:enums.html#HighLow[HighLow]`|-
 |===
 
@@ -95,6 +99,7 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[commandType]]`commandType`|`link:enums.html#CommandType[CommandType]`|-
 |[[value]]`value`|`link:enums.html#IncreaseDecrease[IncreaseDecrease]`|-
 |===
 
@@ -109,6 +114,7 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[commandType]]`commandType`|`link:enums.html#CommandType[CommandType]`|-
 |[[value]]`value`|`link:enums.html#OnOff[OnOff]`|-
 |===
 
@@ -123,6 +129,7 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[commandType]]`commandType`|`link:enums.html#CommandType[CommandType]`|-
 |===
 
 [[StopMoveValue]]
@@ -136,6 +143,7 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[commandType]]`commandType`|`link:enums.html#CommandType[CommandType]`|-
 |[[value]]`value`|`link:enums.html#StopMove[StopMove]`|-
 |===
 
@@ -150,6 +158,7 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[commandType]]`commandType`|`link:enums.html#CommandType[CommandType]`|-
 |[[value]]`value`|`String`|-
 |===
 
@@ -164,6 +173,7 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[commandType]]`commandType`|`link:enums.html#CommandType[CommandType]`|-
 |[[value]]`value`|`link:enums.html#UpDown[UpDown]`|-
 |===
 

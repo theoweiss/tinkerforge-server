@@ -25,6 +25,7 @@ import io.vertx.core.json.JsonObject;
 @DataObject(generateConverter = true)
 public class HighLowValue implements Command{
   private HighLow value;
+  private final CommandType COMMAND_TYPE = CommandType.HIGHLOW;
 
   public HighLowValue(HighLow value) {
     this.value = value;
@@ -41,6 +42,7 @@ public class HighLowValue implements Command{
   public JsonObject toJson(){
     JsonObject json = new JsonObject();
     HighLowValueConverter.toJson(this, json);
+    json.put(Command.COMMAND_TYPE_FIELD, COMMAND_TYPE.name());
     return json;
   }
 
@@ -50,6 +52,11 @@ public class HighLowValue implements Command{
 
   public void setValue(HighLow value) {
     this.value = value;
+  }
+
+  @Override
+  public CommandType getCommandType() {
+    return COMMAND_TYPE;
   }
 
   public enum HighLow{

@@ -23,7 +23,8 @@ import io.vertx.core.json.JsonObject;
  */
 
 @DataObject(generateConverter = true)
-public class OnOffValue {
+public class OnOffValue implements Command {
+  private final CommandType COMMAND_TYPE = CommandType.ONOFF;
   private OnOff value;
 
   public OnOffValue(OnOff value) {
@@ -41,6 +42,7 @@ public class OnOffValue {
   public JsonObject toJson(){
     JsonObject json = new JsonObject();
     OnOffValueConverter.toJson(this, json);
+    json.put(Command.COMMAND_TYPE_FIELD, COMMAND_TYPE.name());
     return json;
   }
 
@@ -50,6 +52,11 @@ public class OnOffValue {
 
   public void setValue(OnOff value) {
     this.value = value;
+  }
+
+  @Override
+  public CommandType getCommandType() {
+    return COMMAND_TYPE;
   }
 
   public enum OnOff {

@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.m1theo.tinkerforge.server.impl;
-
 /**
  * @author theo@m1theo.org
  */
-public class Constants {
-  public static final String ECOSYSTEM_ADDRESS = "ecosystem";
-}
+@ModuleGen(name = "tinkerforgeServer", groupPackage = "org.m1theo.tinkerforge.server")
+package org.m1theo.tinkerforge.server.tinkerforge;
+
+import io.vertx.codegen.annotations.ModuleGen;

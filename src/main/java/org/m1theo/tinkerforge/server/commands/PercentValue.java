@@ -26,6 +26,7 @@ import java.math.BigDecimal;
 
 @DataObject(generateConverter = true)
 public class PercentValue implements Command{
+  private final CommandType COMMAND_TYPE = CommandType.PERCENT;
   private BigDecimal value;
 
   public PercentValue(BigDecimal value) {
@@ -44,6 +45,7 @@ public class PercentValue implements Command{
   public JsonObject toJson(){
     JsonObject json = new JsonObject();
     PercentValueConverter.toJson(this, json);
+    json.put(Command.COMMAND_TYPE_FIELD, COMMAND_TYPE.name());
     return json;
   }
 
@@ -60,5 +62,10 @@ public class PercentValue implements Command{
       throw new IllegalArgumentException("Value must be between 0 and 100");
     }
     return value;
+  }
+
+  @Override
+  public CommandType getCommandType() {
+    return COMMAND_TYPE;
   }
 }

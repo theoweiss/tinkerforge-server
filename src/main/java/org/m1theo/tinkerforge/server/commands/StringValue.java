@@ -24,6 +24,7 @@ import io.vertx.core.json.JsonObject;
 
 @DataObject(generateConverter = true)
 public class StringValue implements Command {
+  private final CommandType COMMAND_TYPE = CommandType.STRING;
   private String value;
 
   public StringValue(String value) {
@@ -41,6 +42,7 @@ public class StringValue implements Command {
   public JsonObject toJson(){
     JsonObject json = new JsonObject();
     StringValueConverter.toJson(this, json);
+    json.put(Command.COMMAND_TYPE_FIELD, COMMAND_TYPE.name());
     return json;
   }
 
@@ -50,5 +52,10 @@ public class StringValue implements Command {
 
   public void setValue(String value) {
     this.value = value;
+  }
+
+  @Override
+  public CommandType getCommandType() {
+    return COMMAND_TYPE;
   }
 }

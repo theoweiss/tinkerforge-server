@@ -26,6 +26,7 @@ import java.math.BigDecimal;
 
 @DataObject(generateConverter = true)
 public class DecimalValue implements Command {
+  private final CommandType COMMAND_TYPE = CommandType.DECIMAL;
   private BigDecimal value;
 
   public DecimalValue(BigDecimal value) {
@@ -51,6 +52,12 @@ public class DecimalValue implements Command {
   public JsonObject toJson(){
     JsonObject json = new JsonObject();
     DecimalValueConverter.toJson(this, json);
+    json.put(Command.COMMAND_TYPE_FIELD, COMMAND_TYPE.name());
     return json;
+  }
+
+  @Override
+  public CommandType getCommandType() {
+  return COMMAND_TYPE;
   }
 }

@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.m1theo.tinkerforge.server;
+package org.m1theo.tinkerforge.server.tinkerforge;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.MessageConsumer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.serviceproxy.ServiceBinder;
-import org.m1theo.tinkerforge.server.impl.Constants;
+import org.m1theo.tinkerforge.server.tinkerforge.impl.Constants;
 
 /**
  * @author theo@m1theo.org

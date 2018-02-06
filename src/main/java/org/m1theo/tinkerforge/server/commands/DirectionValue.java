@@ -23,7 +23,8 @@ import io.vertx.core.json.JsonObject;
  */
 
 @DataObject(generateConverter = true)
-public class DirectionValue {
+public class DirectionValue implements Command{
+  private final CommandType COMMAND_TYPE = CommandType.DIRECTION;
   private Direction direction;
 
   public DirectionValue() {
@@ -42,6 +43,7 @@ public class DirectionValue {
   public JsonObject toJson(){
     JsonObject json = new JsonObject();
     DirectionValueConverter.toJson(this, json);
+    json.put(Command.COMMAND_TYPE_FIELD, COMMAND_TYPE.name());
     return json;
   }
 
@@ -51,6 +53,11 @@ public class DirectionValue {
 
   public void setDirection(Direction direction) {
     this.direction = direction;
+  }
+
+  @Override
+  public CommandType getCommandType() {
+    return COMMAND_TYPE;
   }
 
   public enum Direction{

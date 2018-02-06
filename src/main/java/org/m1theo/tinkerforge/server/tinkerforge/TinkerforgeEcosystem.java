@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.m1theo.tinkerforge.server;
+package org.m1theo.tinkerforge.server.tinkerforge;
 
 import io.vertx.codegen.annotations.ProxyGen;
 import io.vertx.codegen.annotations.VertxGen;
@@ -23,7 +23,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import org.m1theo.tinkerforge.server.commands.CommandHolder;
 import org.m1theo.tinkerforge.server.commands.DeviceOptions;
-import org.m1theo.tinkerforge.server.impl.TinkerforgeEcosystemImpl;
+import org.m1theo.tinkerforge.server.tinkerforge.impl.TinkerforgeEcosystemImpl;
 
 /**
  * @author theo@m1theo.org

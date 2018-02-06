@@ -24,6 +24,7 @@ import io.vertx.core.json.JsonObject;
 
 @DataObject(generateConverter = true)
 public class StopMoveValue implements Command {
+  private final CommandType COMMAND_TYPE = CommandType.STOPMOVE;
   private StopMove value;
 
   public StopMoveValue(StopMove value) {
@@ -41,6 +42,7 @@ public class StopMoveValue implements Command {
   public JsonObject toJson(){
     JsonObject json = new JsonObject();
     StopMoveValueConverter.toJson(this, json);
+    json.put(Command.COMMAND_TYPE_FIELD, COMMAND_TYPE.name());
     return json;
   }
 
@@ -50,6 +52,11 @@ public class StopMoveValue implements Command {
 
   public void setValue(StopMove value) {
     this.value = value;
+  }
+
+  @Override
+  public CommandType getCommandType() {
+    return COMMAND_TYPE;
   }
 
   public enum StopMove {

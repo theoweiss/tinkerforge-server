@@ -24,6 +24,7 @@ import io.vertx.core.json.JsonObject;
 
 @DataObject(generateConverter = true)
 public class UpDownValue implements Command{
+  private final CommandType COMMAND_TYPE = CommandType.UPDOWN;
   private UpDown value;
 
   public UpDownValue(UpDown value) {
@@ -41,6 +42,7 @@ public class UpDownValue implements Command{
   public JsonObject toJson(){
     JsonObject json = new JsonObject();
     UpDownValueConverter.toJson(this, json);
+    json.put(Command.COMMAND_TYPE_FIELD, COMMAND_TYPE.name());
     return json;
   }
 
@@ -50,6 +52,11 @@ public class UpDownValue implements Command{
 
   public void setValue(UpDown value) {
     this.value = value;
+  }
+
+  @Override
+  public CommandType getCommandType() {
+    return COMMAND_TYPE;
   }
 
   public enum UpDown{
