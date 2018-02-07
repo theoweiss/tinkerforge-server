@@ -22,7 +22,9 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
+import org.m1theo.tinkerforge.server.tinkerforge.Host;
 import org.m1theo.tinkerforge.server.commands.DeviceOptions;
+import java.util.List;
 import io.vertx.reactivex.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.AsyncResult;
@@ -79,6 +81,14 @@ public class TinkerforgeEcosystem {
   public static TinkerforgeEcosystem createProxy(Vertx vertx) { 
     TinkerforgeEcosystem ret = TinkerforgeEcosystem.newInstance(org.m1theo.tinkerforge.server.tinkerforge.TinkerforgeEcosystem.createProxy(vertx.getDelegate()));
     return ret;
+  }
+
+  public void connectBrickd(String host, Integer port, String authKey) { 
+    delegate.connectBrickd(host, port, authKey);
+  }
+
+  public void connectBrickds(List<Host> hosts) { 
+    delegate.connectBrickds(hosts);
   }
 
   public void execute(String uid, String subId, CommandHolder command, DeviceOptions options, Handler<AsyncResult<Void>> handler) { 

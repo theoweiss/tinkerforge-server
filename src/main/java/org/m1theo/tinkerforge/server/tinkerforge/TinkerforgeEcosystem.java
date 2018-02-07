@@ -25,6 +25,8 @@ import org.m1theo.tinkerforge.server.commands.CommandHolder;
 import org.m1theo.tinkerforge.server.commands.DeviceOptions;
 import org.m1theo.tinkerforge.server.tinkerforge.impl.TinkerforgeEcosystemImpl;
 
+import java.util.List;
+
 /**
  * @author theo@m1theo.org
  */
@@ -40,6 +42,10 @@ public interface TinkerforgeEcosystem {
   static TinkerforgeEcosystem createProxy(Vertx vertx) {
     return new TinkerforgeEcosystemVertxEBProxy(vertx, "ecosystem");
   }
+
+  void connectBrickd(String host, Integer port, String authKey);
+
+  void connectBrickds(List<Host> hosts);
 
   void execute(String uid, String subId, CommandHolder command, DeviceOptions options, Handler<AsyncResult<Void>> handler);
 }

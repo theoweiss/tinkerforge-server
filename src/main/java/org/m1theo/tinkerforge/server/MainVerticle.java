@@ -21,6 +21,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.reactivex.core.Vertx;
+import org.m1theo.tinkerforge.config.Host;
+import org.m1theo.tinkerforge.config.Utils;
 import org.m1theo.tinkerforge.server.commands.Command;
 import org.m1theo.tinkerforge.server.commands.CommandFactory;
 import org.m1theo.tinkerforge.server.commands.CommandHolder;
@@ -29,18 +31,31 @@ import org.m1theo.tinkerforge.server.tinkerforge.TinkerforgeEcosystemVerticle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class MainVerticle extends AbstractVerticle {
   private static final Integer port = 9080;
   private static final Integer HTTP_CODE_INVALID_REQ = 301;
   private static final int HTTP_CODE_OK = 202;
   private static final int HTTP_CODE_FAILED = 505;
+  private static final String CONFIG_KEY_HOSTS = "hosts";
   private Logger logger = LoggerFactory.getLogger(MainVerticle.class);
   private TinkerforgeEcosystem ecosystem;
 
   @Override
-  public void start() throws Exception {
+  public void start() {
+    logger.debug("config {}", config().encode());
     ecosystem = TinkerforgeEcosystem.createProxy(Vertx.newInstance(vertx));
-    vertx.deployVerticle(TinkerforgeEcosystemVerticle.class, new DeploymentOptions().setConfig(config()));
+    vertx.deployVerticle(TinkerforgeEcosystemVerticle.class, new DeploymentOptions().setConfig(config()), res ->{
+      String cfgHostsLine = config().getString(CONFIG_KEY_HOSTS);
+      if (cfgHostsLine != null){
+        logger.debug(cfgHostsLine);
+        List<Host> hosts = Utils.parseCfgHosts(cfgHostsLine);
+        ecosystem.connectBrickds(hosts.stream().map(org.m1theo.tinkerforge.server.tinkerforge.Host::new).collect
+            (Collectors.toList()));
+      }
+    });
     startHttpServer(config());
   }
 
@@ -49,7 +64,7 @@ public class MainVerticle extends AbstractVerticle {
     router.route().handler(BodyHandler.create());
     addRoutes(router);
     vertx.createHttpServer().requestHandler(router::accept).listen(port);
-    System.out.println("HTTP server started on port " + port.toString());
+    logger.debug("HTTP server started on port {}", port.toString());
   }
 
   private void addRoutes(Router router) {
@@ -69,6 +84,29 @@ public class MainVerticle extends AbstractVerticle {
         return;
       }
       ecosystem.rxExecute(uid, subid, new CommandHolder(command), null)
+          .subscribe(() -> {
+            logger.debug("success");
+            context.response().setStatusCode(HTTP_CODE_OK);
+          }, e -> {
+            logger.error("failed", e);
+            context.response().setStatusCode(HTTP_CODE_FAILED).end(e.getMessage());
+          });
+    });
+    router.put("/command/:uid").handler(context -> {
+      JsonObject body = context.getBodyAsJson();
+      if (body == null) {
+        context.response().setStatusCode(HTTP_CODE_INVALID_REQ).end("missing body");
+        logger.debug("invalid request: missing body");
+        return;
+      }
+      String uid = context.request().getParam("uid");
+      Command command = CommandFactory.getCommand(body);
+      if (command == null) {
+        context.response().setStatusCode(HTTP_CODE_INVALID_REQ).end("missing body");
+        logger.debug("invalid request: missing body");
+        return;
+      }
+      ecosystem.rxExecute(uid, null, new CommandHolder(command), null)
           .subscribe(() -> {
             logger.debug("success");
             context.response().setStatusCode(HTTP_CODE_OK);

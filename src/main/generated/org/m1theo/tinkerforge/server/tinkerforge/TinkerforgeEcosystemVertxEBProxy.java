@@ -32,7 +32,9 @@ import java.util.function.Function;
 import io.vertx.serviceproxy.ProxyHelper;
 import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
+import org.m1theo.tinkerforge.server.tinkerforge.Host;
 import org.m1theo.tinkerforge.server.commands.DeviceOptions;
+import java.util.List;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.AsyncResult;
@@ -64,6 +66,30 @@ public class TinkerforgeEcosystemVertxEBProxy implements TinkerforgeEcosystem {
       this._vertx.eventBus().registerDefaultCodec(ServiceException.class,
           new ServiceExceptionMessageCodec());
     } catch (IllegalStateException ex) {}
+  }
+
+  public void connectBrickd(String host, Integer port, String authKey) {
+    if (closed) {
+    throw new IllegalStateException("Proxy is closed");
+  }
+    JsonObject _json = new JsonObject();
+    _json.put("host", host);
+    _json.put("port", port);
+    _json.put("authKey", authKey);
+    DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
+    _deliveryOptions.addHeader("action", "connectBrickd");
+    _vertx.eventBus().send(_address, _json, _deliveryOptions);
+  }
+
+  public void connectBrickds(List<Host> hosts) {
+    if (closed) {
+    throw new IllegalStateException("Proxy is closed");
+  }
+    JsonObject _json = new JsonObject();
+    _json.put("hosts", new JsonArray(hosts.stream().map(r -> r == null ? null : r.toJson()).collect(Collectors.toList())));
+    DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
+    _deliveryOptions.addHeader("action", "connectBrickds");
+    _vertx.eventBus().send(_address, _json, _deliveryOptions);
   }
 
   public void execute(String uid, String subId, CommandHolder command, DeviceOptions options, Handler<AsyncResult<Void>> handler) {

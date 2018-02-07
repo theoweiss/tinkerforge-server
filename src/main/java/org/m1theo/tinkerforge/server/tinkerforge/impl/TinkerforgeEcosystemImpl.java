@@ -22,6 +22,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import org.m1theo.tinkerforge.emf.client.Client;
 import org.m1theo.tinkerforge.emf.client.LoggingDataListener;
+import org.m1theo.tinkerforge.server.tinkerforge.Host;
 import org.m1theo.tinkerforge.server.tinkerforge.TinkerforgeCommandFactory;
 import org.m1theo.tinkerforge.server.tinkerforge.TinkerforgeEcosystem;
 import org.m1theo.tinkerforge.server.commands.CommandHolder;
@@ -29,6 +30,9 @@ import org.m1theo.tinkerforge.server.commands.DeviceOptions;
 import org.m1theo.tinkerforge.types.TinkerforgeValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author theo@m1theo.org
@@ -43,6 +47,18 @@ public class TinkerforgeEcosystemImpl implements TinkerforgeEcosystem {
     this.vertx = vertx;
     this.config = config;
     client = Client.createInstance(config.getMap(), new LoggingDataListener());
+  }
+
+  @Override
+  public void connectBrickd(String host, Integer port, String authKey) {
+    client.connectBrickd(host, port, authKey);
+  }
+
+  @Override
+  public void connectBrickds(List<Host> hosts) {
+    List<org.m1theo.tinkerforge.config.Host> hostList = hosts.stream().map(host -> new org.m1theo.tinkerforge.config.Host(host.getHost(), host.getPort(), host.getAuthKey
+        ())).collect(Collectors.toList());
+    client.connectBrickds(hostList);
   }
 
   @Override

@@ -88,6 +88,22 @@
 |[[value]]`value`|`link:enums.html#HighLow[HighLow]`|-
 |===
 
+[[Host]]
+== Host
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[authKey]]`authKey`|`String`|-
+|[[host]]`host`|`String`|-
+|[[port]]`port`|`Number (Integer)`|-
+|===
+
 [[IncreaseDecreaseValue]]
 == IncreaseDecreaseValue
 

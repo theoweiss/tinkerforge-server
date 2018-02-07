@@ -39,7 +39,9 @@ import io.vertx.serviceproxy.ProxyHelper;
 import io.vertx.serviceproxy.ProxyHandler;
 import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
+import org.m1theo.tinkerforge.server.tinkerforge.Host;
 import org.m1theo.tinkerforge.server.commands.DeviceOptions;
+import java.util.List;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.AsyncResult;
@@ -120,6 +122,14 @@ public class TinkerforgeEcosystemVertxProxyHandler extends ProxyHandler {
       switch (action) {
 
 
+        case "connectBrickd": {
+          service.connectBrickd((java.lang.String)json.getValue("host"), json.getValue("port") == null ? null : (json.getLong("port").intValue()), (java.lang.String)json.getValue("authKey"));
+          break;
+        }
+        case "connectBrickds": {
+          service.connectBrickds(json.getJsonArray("hosts").stream().map(o -> new Host((JsonObject)o)).collect(Collectors.toList()));
+          break;
+        }
         case "execute": {
           service.execute((java.lang.String)json.getValue("uid"), (java.lang.String)json.getValue("subId"), json.getJsonObject("command") == null ? null : new org.m1theo.tinkerforge.server.commands.CommandHolder(json.getJsonObject("command")), json.getJsonObject("options") == null ? null : new org.m1theo.tinkerforge.server.commands.DeviceOptions(json.getJsonObject("options")), createHandler(msg));
           break;
